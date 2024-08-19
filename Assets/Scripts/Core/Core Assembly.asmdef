@@ -1,0 +1,16 @@
+{
+    "name": "CoreAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:537c3fb9f14249840aa9e5d1340d51a8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
