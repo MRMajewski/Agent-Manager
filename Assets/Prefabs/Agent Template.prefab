@@ -391,6 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab01c3bcc5b230e469e3a1bd53b43d29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveDurationRange: {x: 2, y: 5}
   AgentSpawnRange: {x: 25, y: 25}
 --- !u!1 &1759838451836578093
 GameObject:
