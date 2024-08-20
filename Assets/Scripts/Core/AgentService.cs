@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AgentService : IAgentService
+public class AgentService : MonoBehaviour, IAgentService
 {
     public event Action<Agent> OnAgentAdded;
     public event Action<Agent> OnAgentRemoved;
@@ -14,7 +14,6 @@ public class AgentService : IAgentService
     [SerializeField]
     private AgentManager agentManager;
 
-
     public void AddAgent(Agent agent)
     {
         agents.Add(agent);
@@ -24,7 +23,7 @@ public class AgentService : IAgentService
     public void ClearAllAgents()
     {
         agents.Clear();
-        OnAllAgentsCleared?.Invoke(); // Wysy³amy zdarzenie, ¿e wszyscy agenci zostali usuniêci
+        OnAllAgentsCleared?.Invoke(); 
     }
 
     public List<Agent> GetAgents()
@@ -39,7 +38,7 @@ public class AgentService : IAgentService
             int index = UnityEngine.Random.Range(0, agents.Count);
             Agent agentToRemove = agents[index];
             agents.RemoveAt(index);
-            OnAgentRemoved?.Invoke(agentToRemove); // Wysy³amy zdarzenie, ¿e agent zosta³ usuniêty
+            OnAgentRemoved?.Invoke(agentToRemove); 
         }
     }
 
