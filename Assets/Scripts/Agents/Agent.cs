@@ -29,10 +29,7 @@ public class Agent : MonoBehaviour, IAgent
     public void Initialize(string guid)
     {
         GUID = guid;
-
         Debug.Log($"Agent {GUID} zosta³ zainicjalizowany");
-
-        SetNewRandomDestination();
     }
 
     public void SetNewRandomDestination()
@@ -59,12 +56,12 @@ public class Agent : MonoBehaviour, IAgent
         transform.DOMove(targetPosition, moveDuration).OnComplete(() =>
         {
             OnTargetReached?.Invoke(this.GUID);
-            SetNewRandomDestination();
+            SetNewRandomDestination();           
         });
     }
 
     private void OnDestroy()
     {
-
+        this.DOKill(false);
     }
 }

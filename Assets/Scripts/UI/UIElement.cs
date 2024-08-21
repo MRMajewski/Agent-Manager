@@ -12,7 +12,7 @@ public class UIElement : MonoBehaviour
     [SerializeField] 
     private TextMeshProUGUI messageLabel;
     [SerializeField]
-    private CanvasGroup messageLabelCanvasGroup;  // Przypisz CanvasGroup w Inspectorze
+    private CanvasGroup messageLabelCanvasGroup; 
     [SerializeField]
     private float blinkDuration = 0.35f;
     private void Awake()
@@ -22,22 +22,17 @@ public class UIElement : MonoBehaviour
 
     private void DisplayArrivalMessage(string agentGuid)
     {
-        Debug.Log("BLINK");
         Blink();
         messageLabel.text = $"Agent {agentGuid} arrived at destination!";
- 
     }
 
     void Blink()
     {
         this.DOKill(false);
-        // Tworzymy sekwencjê
-        Sequence blinkSequence = DOTween.Sequence();
 
-        // Nastêpnie animacjê powrotu alpha do 1
+        Sequence blinkSequence = DOTween.Sequence();
         blinkSequence.Append(messageLabelCanvasGroup.DOFade(1, blinkDuration));
         blinkSequence.AppendInterval(2f);
         blinkSequence.Append(messageLabelCanvasGroup.DOFade(0, blinkDuration));
-
     }
 }

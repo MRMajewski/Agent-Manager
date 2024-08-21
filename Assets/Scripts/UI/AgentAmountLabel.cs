@@ -20,7 +20,7 @@ public class AgentAmountLabel : MonoBehaviour
     }
     public void UpdateAgentAmountLabel()
     {
-        agentAmountLabel.text = "Agents: "+agentService.Agents.Count;
+        agentAmountLabel.text = "Agents: "+ agentService.Agents.Count;
     }
 
     private void OnDestroy()

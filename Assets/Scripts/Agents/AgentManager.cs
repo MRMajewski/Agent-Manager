@@ -23,23 +23,19 @@ public class AgentManager : MonoBehaviour
     public void Spawn()
     {
         GameObject newAgentGameobject = Instantiate(agentPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
-
         Agent newAgent = newAgentGameobject.GetComponent<Agent>();
 
-      
-
-        newAgent.AgentGameObject = newAgentGameobject;
         newAgent.Initialize(Guid.NewGuid().ToString());
-
+        newAgent.OnTargetReached += agentService.HandleAgentReachedDestination;
+        newAgent.AgentGameObject = newAgentGameobject;  
      
         RegisterSpawnedAgent(newAgent);
-        newAgent.OnTargetReached += agentService.HandleNewAgent;
+        newAgent.SetNewRandomDestination();
     }
 
     public void RegisterSpawnedAgent(Agent agent)
     {
-        agentService.Agents.Add(agent);
-       
+        agentService.Agents.Add(agent);       
     }
 
     public void ChangeGameSpeed(float newSpeed)

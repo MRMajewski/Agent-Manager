@@ -26,11 +26,6 @@ public class AgentService : MonoBehaviour, IAgentService
     [SerializeField]
     public List<IAgent> Agents { get => agents; set => agents = value; }
 
-    private void Awake()
-    {
-      //  agentManager.OnAgentSpawned += HandleNewAgent;
-    }
-
     public void RequestAgentSpawn()
     {
         OnRequestAgentSpawn.Invoke();
@@ -41,25 +36,17 @@ public class AgentService : MonoBehaviour, IAgentService
     {
         OnAgentRemoved.Invoke();
         OnAgentNumberChanged.Invoke();
-
     }
 
     public void ClearAllAgents()
     {
         OnAllAgentsCleared?.Invoke();
         OnAgentNumberChanged.Invoke();
-
-    }
-    public void HandleNewAgent(string agentGUI)
-    {
-        Debug.Log("HandleNewAgent");
-        IAgent agent = Agents.Find(agent => agent.GUID == agentGUI);
-        (agent as IAgent).OnTargetReached += HandleAgentReachedDestination;
     }
 
-    private void HandleAgentReachedDestination(string agentGuid)
+    public void HandleAgentReachedDestination(string agentGuid)
     {
-        Debug.Log("HandleAgentReachedDestination");
+        Debug.Log($"Agent {agentGuid} dotar³ do celu.");
         OnAgentReachedDestination?.Invoke(agentGuid);
     }
 }
