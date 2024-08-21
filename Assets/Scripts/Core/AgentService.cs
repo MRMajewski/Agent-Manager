@@ -11,24 +11,20 @@ public class AgentService : MonoBehaviour, IAgentService
 
     private List<Agent> agents = new List<Agent>();
 
+    public List<Agent> Agents { get; set; }
+
     [SerializeField]
     private AgentManager agentManager;
 
+    public void RequestAgentSpawn()
+    {
+        Agent newAgent = agentManager.Spawn();
+        AddAgent(newAgent);
+    }
     public void AddAgent(Agent agent)
     {
         agents.Add(agent);
         OnAgentAdded?.Invoke(agent); 
-    }
-
-    public void ClearAllAgents()
-    {
-        agents.Clear();
-        OnAllAgentsCleared?.Invoke(); 
-    }
-
-    public List<Agent> GetAgents()
-    {
-        return agents;
     }
 
     public void RemoveRandomAgent()
@@ -38,13 +34,16 @@ public class AgentService : MonoBehaviour, IAgentService
             int index = UnityEngine.Random.Range(0, agents.Count);
             Agent agentToRemove = agents[index];
             agents.RemoveAt(index);
-            OnAgentRemoved?.Invoke(agentToRemove); 
+            OnAgentRemoved?.Invoke(agentToRemove);
+            agentManager.RemoveAgent(agentToRemove);
         }
     }
 
-    public void RequestAgentSpawn()
+    public void ClearAllAgents()
     {
-        Agent newAgent = agentManager.Spawn();
-        AddAgent(newAgent);
+        agentManager.ClearAllAgents();
+        agents.Clear();
+        OnAllAgentsCleared?.Invoke();
     }
+
 }

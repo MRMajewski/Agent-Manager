@@ -14,7 +14,6 @@ public interface IAgentService
     void AddAgent(Agent agent);
     void RemoveRandomAgent();
     void ClearAllAgents();
-    List<Agent> GetAgents();
 
     public void RequestAgentSpawn();
 }
