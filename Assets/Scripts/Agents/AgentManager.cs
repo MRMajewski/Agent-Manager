@@ -6,29 +6,37 @@ using UnityEngine;
 
 public class AgentManager : MonoBehaviour
 {
-    private List<Agent> agents = new List<Agent>();
+    [SerializeField]
+    private GameObject agentPrefab;
+    [SerializeField]
+    private Transform spawnPoint;
+    [SerializeField]
+    private AgentService agentService;
 
-    [SerializeField] private GameObject agentPrefab; 
-    [SerializeField] private Transform spawnPoint; 
+    public event Action<Agent> OnAgentSpawned;
 
-    [ContextMenu("Spawn")]
-    public Agent Spawn()
+    private void Awake()
     {
-        GameObject newAgentGameobject = Instantiate(agentPrefab, spawnPoint.position, Quaternion.identity,spawnPoint);
-
-        Agent newAgent = newAgentGameobject.GetComponent<Agent>();
-
-        newAgent.Initialize(Guid.NewGuid().ToString());
-
-        agents.Add(newAgent);
-
-        return newAgent;
+        agentService.OnRequestAgentSpawn += Spawn;
+        agentService.OnAgentRemoved += RemoveAgent;
+        agentService.OnAllAgentsCleared += ClearAllAgents;
     }
 
+    public void Spawn()
+    {
+        GameObject newAgentGameobject = Instantiate(agentPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
+
+        Agent newAgent = newAgentGameobject.GetComponent<Agent>();
+        newAgent.AgentGameObject = newAgentGameobject;
+        newAgent.Initialize(Guid.NewGuid().ToString());
+
+        OnAgentSpawned?.Invoke(newAgent);
+        RegisterSpawnedAgent(newAgent);
+    }
 
     public void RegisterSpawnedAgent(Agent agent)
     {
-
+        agentService.Agents.Add(agent);
     }
 
     public void ChangeGameSpeed(float newSpeed)
@@ -37,21 +45,28 @@ public class AgentManager : MonoBehaviour
         DOTween.timeScale = newSpeed;
     }
 
-    public void RemoveAgent(Agent agent)
+    public void RemoveAgent()
     {
-        if (agents.Contains(agent))
+        if (agentService.Agents.Count > 0)
         {
-            agents.Remove(agent);
-            Destroy(agent.gameObject); 
+            int index = UnityEngine.Random.Range(0, agentService.Agents.Count);
+            IAgent agentToRemove = agentService.Agents[index];
+
+            Destroy(agentToRemove.AgentGameObject);
+            agentService.Agents.RemoveAt(index);
         }
     }
 
     public void ClearAllAgents()
     {
-        foreach (Agent agent in agents)
+        foreach (Agent agent in agentService.Agents)
         {
-            Destroy(agent.gameObject); 
+            if (DOTween.IsTweening(agent))
+            {
+                DOTween.Kill(agent, false);
+            }
+            Destroy(agent.AgentGameObject);
         }
-        agents.Clear(); 
+        agentService.Agents.Clear();
     }
 }

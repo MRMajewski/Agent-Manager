@@ -2,48 +2,39 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+public interface IAgent
+{
+    public string GUID { get; }
+    public void SetNewRandomDestination();
+    public GameObject AgentGameObject { get; set; }
+}
 public class AgentService : MonoBehaviour, IAgentService
 {
-    public event Action<Agent> OnAgentAdded;
-    public event Action<Agent> OnAgentRemoved;
+    public event Action OnRequestAgentSpawn;
+    public event Action OnAgentRemoved;
     public event Action OnAllAgentsCleared;
 
-    private List<Agent> agents = new List<Agent>();
-
-    public List<Agent> Agents { get; set; }
+    private List<IAgent> agents = new List<IAgent>();
 
     [SerializeField]
-    private AgentManager agentManager;
+    public List<IAgent> Agents { get => agents; set => agents = value; }
 
     public void RequestAgentSpawn()
     {
-        Agent newAgent = agentManager.Spawn();
-        AddAgent(newAgent);
-    }
-    public void AddAgent(Agent agent)
-    {
-        agents.Add(agent);
-        OnAgentAdded?.Invoke(agent); 
+        OnRequestAgentSpawn?.Invoke();
     }
 
     public void RemoveRandomAgent()
     {
-        if (agents.Count > 0)
-        {
-            int index = UnityEngine.Random.Range(0, agents.Count);
-            Agent agentToRemove = agents[index];
-            agents.RemoveAt(index);
-            OnAgentRemoved?.Invoke(agentToRemove);
-            agentManager.RemoveAgent(agentToRemove);
-        }
+        OnAgentRemoved.Invoke();
     }
 
     public void ClearAllAgents()
     {
-        agentManager.ClearAllAgents();
-        agents.Clear();
         OnAllAgentsCleared?.Invoke();
     }
 
+    public void RegisterSpawnedAgent()
+    {
+    }
 }

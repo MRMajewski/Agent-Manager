@@ -4,17 +4,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Agent : MonoBehaviour
+public class Agent : MonoBehaviour, IAgent
 {
-    public string GUID { get; private set; } 
+    public string GUID { get; private set; }
+    [SerializeField]
+    private GameObject agentGameObject;
+    public GameObject AgentGameObject { get; set; }
+
     [SerializeField]
     private Vector2 moveDurationRange;
+    [SerializeField]
 
-    private Vector3 targetPosition;       
-    private float moveDuration = 5f; 
-    private float rotationDuration = 0.2f;        
 
-    public event Action<Agent> OnTargetReached; 
+    private Vector3 targetPosition;
+    private float moveDuration = 5f;
+    private float rotationDuration = 0.2f;
+
+    public event Action<Agent> OnTargetReached;
 
     [SerializeField]
     private Vector2 AgentSpawnRange;
@@ -25,15 +31,15 @@ public class Agent : MonoBehaviour
 
         Debug.Log($"Agent {GUID} zosta³ zainicjalizowany");
 
-        SetNewRandomTarget();
+        SetNewRandomDestination();
     }
 
-    private void SetNewRandomTarget()
+    public void SetNewRandomDestination()
     {
         targetPosition = new Vector3(UnityEngine.Random.Range(
-            -1*AgentSpawnRange.x, AgentSpawnRange.x), 0, UnityEngine.Random.Range(-1 * AgentSpawnRange.y, AgentSpawnRange.y)
+            -1 * AgentSpawnRange.x, AgentSpawnRange.x), 0, UnityEngine.Random.Range(-1 * AgentSpawnRange.y, AgentSpawnRange.y)
             );
-        
+
         RotateTowards();
         MoveToTarget();
     }
@@ -43,7 +49,7 @@ public class Agent : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction);
 
         transform.DORotateQuaternion(targetRotation, rotationDuration)
-            .SetEase(Ease.InOutQuad); 
+            .SetEase(Ease.InOutQuad);
     }
     private void MoveToTarget()
     {
@@ -52,18 +58,12 @@ public class Agent : MonoBehaviour
         transform.DOMove(targetPosition, moveDuration).OnComplete(() =>
         {
             OnTargetReached?.Invoke(this);
-            SetNewRandomTarget(); 
+            SetNewRandomDestination();
         });
     }
 
     private void OnDestroy()
+    {
 
-    {      if(DOTween.IsTweening(this))
-        {
-            DOTween.Kill(this, false);
-         //   DOTween.Kill(this, true);
-        }
-      
     }
-
 }

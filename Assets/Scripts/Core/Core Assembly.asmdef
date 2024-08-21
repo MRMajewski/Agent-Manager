@@ -1,9 +1,7 @@
 {
     "name": "CoreAssembly",
     "rootNamespace": "",
-    "references": [
-        "GUID:537c3fb9f14249840aa9e5d1340d51a8"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

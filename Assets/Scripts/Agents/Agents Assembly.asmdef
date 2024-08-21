@@ -1,7 +1,9 @@
 {
     "name": "Agents",
     "rootNamespace": "",
-    "references": [],
+    "references": [
+        "GUID:8e9a7dd82cb6fbc4bb5fe0e3bf3ee419"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
