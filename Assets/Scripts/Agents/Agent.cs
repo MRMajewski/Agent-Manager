@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class Agent : MonoBehaviour, IAgent
 {
     public string GUID { get; private set; }

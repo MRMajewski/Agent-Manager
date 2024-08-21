@@ -2,15 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public interface IAgent
-{
-    public string GUID { get; }
-    public void SetNewRandomDestination();
-    public GameObject AgentGameObject { get; set; }
-    public event Action<string> OnTargetReached;
-}
-
-
 public class AgentService : MonoBehaviour, IAgentService
 {
     public event Action OnRequestAgentSpawn;
@@ -31,7 +22,6 @@ public class AgentService : MonoBehaviour, IAgentService
         OnRequestAgentSpawn.Invoke();
         OnAgentNumberChanged.Invoke();
     }
-
     public void RemoveRandomAgent()
     {
         OnAgentRemoved.Invoke();
@@ -43,7 +33,6 @@ public class AgentService : MonoBehaviour, IAgentService
         OnAllAgentsCleared?.Invoke();
         OnAgentNumberChanged.Invoke();
     }
-
     public void HandleAgentReachedDestination(string agentGuid)
     {
         Debug.Log($"Agent {agentGuid} dotar³ do celu.");

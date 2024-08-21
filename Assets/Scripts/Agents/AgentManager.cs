@@ -10,14 +10,19 @@ public class AgentManager : MonoBehaviour
     private GameObject agentPrefab;
     [SerializeField]
     private Transform spawnPoint;
+
+    [Header("Core services references")]
     [SerializeField]
     private AgentService agentService;
+    [SerializeField]
+    private TickService tickService;
 
     private void Awake()
     {
         agentService.OnRequestAgentSpawn += Spawn;
         agentService.OnAgentRemoved += RemoveAgent;
         agentService.OnAllAgentsCleared += ClearAllAgents;
+        tickService.OnTickRateChanged += ChangeGameSpeed;
     }
 
     public void Spawn()
@@ -27,21 +32,15 @@ public class AgentManager : MonoBehaviour
 
         newAgent.Initialize(Guid.NewGuid().ToString());
         newAgent.OnTargetReached += agentService.HandleAgentReachedDestination;
-        newAgent.AgentGameObject = newAgentGameobject;  
-     
+        newAgent.AgentGameObject = newAgentGameobject;
+
         RegisterSpawnedAgent(newAgent);
         newAgent.SetNewRandomDestination();
     }
 
     public void RegisterSpawnedAgent(Agent agent)
     {
-        agentService.Agents.Add(agent);       
-    }
-
-    public void ChangeGameSpeed(float newSpeed)
-    {
-        Time.timeScale = newSpeed;
-        DOTween.timeScale = newSpeed;
+        agentService.Agents.Add(agent);
     }
 
     public void RemoveAgent()
@@ -68,10 +67,17 @@ public class AgentManager : MonoBehaviour
         }
         agentService.Agents.Clear();
     }
+
+    public void ChangeGameSpeed(float newSpeed)
+    {
+        Time.timeScale = newSpeed;
+        DOTween.timeScale = Time.timeScale;
+    }
     private void OnDestroy()
     {
         agentService.OnRequestAgentSpawn -= Spawn;
         agentService.OnAgentRemoved -= RemoveAgent;
         agentService.OnAllAgentsCleared -= ClearAllAgents;
+        tickService.OnTickRateChanged -= ChangeGameSpeed;
     }
 }
