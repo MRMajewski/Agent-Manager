@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Agent : MonoBehaviour, IAgent
 {
     public string GUID { get; private set; }
@@ -20,7 +21,7 @@ public class Agent : MonoBehaviour, IAgent
     private float moveDuration = 5f;
     private float rotationDuration = 0.2f;
 
-    public event Action<Agent> OnTargetReached;
+    public event Action<string> OnTargetReached;
 
     [SerializeField]
     private Vector2 AgentSpawnRange;
@@ -57,7 +58,7 @@ public class Agent : MonoBehaviour, IAgent
 
         transform.DOMove(targetPosition, moveDuration).OnComplete(() =>
         {
-            OnTargetReached?.Invoke(this);
+            OnTargetReached?.Invoke(this.GUID);
             SetNewRandomDestination();
         });
     }

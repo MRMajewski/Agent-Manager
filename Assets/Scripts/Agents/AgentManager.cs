@@ -13,8 +13,6 @@ public class AgentManager : MonoBehaviour
     [SerializeField]
     private AgentService agentService;
 
-    public event Action<Agent> OnAgentSpawned;
-
     private void Awake()
     {
         agentService.OnRequestAgentSpawn += Spawn;
@@ -27,16 +25,21 @@ public class AgentManager : MonoBehaviour
         GameObject newAgentGameobject = Instantiate(agentPrefab, spawnPoint.position, Quaternion.identity, spawnPoint);
 
         Agent newAgent = newAgentGameobject.GetComponent<Agent>();
+
+      
+
         newAgent.AgentGameObject = newAgentGameobject;
         newAgent.Initialize(Guid.NewGuid().ToString());
 
-        OnAgentSpawned?.Invoke(newAgent);
+     
         RegisterSpawnedAgent(newAgent);
+        newAgent.OnTargetReached += agentService.HandleNewAgent;
     }
 
     public void RegisterSpawnedAgent(Agent agent)
     {
         agentService.Agents.Add(agent);
+       
     }
 
     public void ChangeGameSpeed(float newSpeed)
@@ -68,5 +71,11 @@ public class AgentManager : MonoBehaviour
             Destroy(agent.AgentGameObject);
         }
         agentService.Agents.Clear();
+    }
+    private void OnDestroy()
+    {
+        agentService.OnRequestAgentSpawn -= Spawn;
+        agentService.OnAgentRemoved -= RemoveAgent;
+        agentService.OnAllAgentsCleared -= ClearAllAgents;
     }
 }
