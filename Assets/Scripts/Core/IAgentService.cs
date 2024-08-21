@@ -9,7 +9,7 @@ public interface IAgentService
     event Action OnAgentRemoved;
     event Action OnAllAgentsCleared;
 
-    void RegisterSpawnedAgent();
+    void RequestAgentSpawn();
     void RemoveRandomAgent();
     void ClearAllAgents();
 }
