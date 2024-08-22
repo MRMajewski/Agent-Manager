@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Agent : MonoBehaviour, IAgent
 {
+    public event Action<string> OnTargetReached;
     public string GUID { get; private set; }
     [SerializeField]
     private GameObject agentGameObject;
@@ -14,21 +15,16 @@ public class Agent : MonoBehaviour, IAgent
     [SerializeField]
     private Vector2 moveDurationRange;
     [SerializeField]
-
-
     private Vector3 targetPosition;
-    private float moveDuration = 5f;
-    private float rotationDuration = 0.2f;
-
-    public event Action<string> OnTargetReached;
-
     [SerializeField]
     private Vector2 AgentSpawnRange;
+
+    private float moveDuration = 5f;
+    private float rotationDuration = 0.2f;
 
     public void Initialize(string guid)
     {
         GUID = guid;
-        Debug.Log($"Agent {GUID} zosta³ zainicjalizowany");
     }
 
     public void SetNewRandomDestination()

@@ -21,14 +21,12 @@ public class TickService : MonoBehaviour, ITickService
         currentTickRate = newTickRate;
         OnTickRateChanged?.Invoke(currentTickRate);
     }
-
     public void IncreaseTickRate()
     {
         currentTickRate = currentTickRate + 1f;
         currentTickRate = Mathf.Clamp(currentTickRate, minSpeed, maxSpeed);
         OnTickRateChanged?.Invoke(currentTickRate);
     }
-
     public void DecreaseTickRate()
     {
         currentTickRate = currentTickRate - 1f;

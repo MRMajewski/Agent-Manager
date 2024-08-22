@@ -6,7 +6,6 @@ public class AgentAmountLabel : MonoBehaviour
 {
     [SerializeField]
     private AgentService agentService;
-
     [SerializeField]
     private TextMeshProUGUI agentAmountLabel;
 
@@ -22,7 +21,6 @@ public class AgentAmountLabel : MonoBehaviour
     {
         agentAmountLabel.text = "Agents: " + agentService.Agents.Count;
     }
-
     private void OnDestroy()
     {
         agentService.OnAgentNumberChanged -= UpdateAgentAmountLabel;
