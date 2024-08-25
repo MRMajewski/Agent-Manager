@@ -20,7 +20,7 @@ public class AgentManager : MonoBehaviour
     private void Awake()
     {
         agentService.OnRequestAgentSpawn += Spawn;
-        agentService.OnAgentRemoved += RemoveAgent;
+        agentService.OnAgentRemoved += RemoveRandomAgent;
         agentService.OnAllAgentsCleared += ClearAllAgents;
         tickService.OnTickRateChanged += ChangeGameSpeed;
     }
@@ -31,7 +31,7 @@ public class AgentManager : MonoBehaviour
         Agent newAgent = newAgentGameobject.GetComponent<Agent>();
 
         newAgent.Initialize(Guid.NewGuid().ToString());
-        newAgent.OnTargetReached += agentService.HandleAgentReachedDestination;
+        newAgent.GetComponent<AgentAIPath>().OnTargetReached += agentService.HandleAgentReachedDestination;
         newAgent.AgentGameObject = newAgentGameobject;
 
         RegisterSpawnedAgent(newAgent);
@@ -43,14 +43,15 @@ public class AgentManager : MonoBehaviour
         agentService.Agents.Add(agent);
     }
 
-    public void RemoveAgent()
+    public void RemoveRandomAgent()
     {
         if (agentService.Agents.Count > 0)
         {
             int index = UnityEngine.Random.Range(0, agentService.Agents.Count);
             IAgent agentToRemove = agentService.Agents[index];
-
+            Destroy(agentToRemove.CurrentTargetTransform.gameObject);
             Destroy(agentToRemove.AgentGameObject);
+         
             agentService.Agents.RemoveAt(index);
         }
     }
@@ -63,7 +64,9 @@ public class AgentManager : MonoBehaviour
             {
                 DOTween.Kill(agent, false);
             }
+            Destroy(agent.CurrentTargetTransform.gameObject);
             Destroy(agent.AgentGameObject);
+          
         }
         agentService.Agents.Clear();
     }
@@ -76,7 +79,7 @@ public class AgentManager : MonoBehaviour
     private void OnDestroy()
     {
         agentService.OnRequestAgentSpawn -= Spawn;
-        agentService.OnAgentRemoved -= RemoveAgent;
+        agentService.OnAgentRemoved -= RemoveRandomAgent;
         agentService.OnAllAgentsCleared -= ClearAllAgents;
         tickService.OnTickRateChanged -= ChangeGameSpeed;
     }

@@ -12,7 +12,7 @@ public class TickService : MonoBehaviour, ITickService
     [SerializeField]
     private float minSpeed = 0f;
     [SerializeField]
-    private float maxSpeed = 10f;
+    private float maxSpeed = 3f;
 
     public float CurrentTickRate { get=>currentTickRate; }
 
@@ -23,13 +23,13 @@ public class TickService : MonoBehaviour, ITickService
     }
     public void IncreaseTickRate()
     {
-        currentTickRate = currentTickRate + 1f;
+        currentTickRate = currentTickRate + .25f;
         currentTickRate = Mathf.Clamp(currentTickRate, minSpeed, maxSpeed);
         OnTickRateChanged?.Invoke(currentTickRate);
     }
     public void DecreaseTickRate()
     {
-        currentTickRate = currentTickRate - 1f;
+        currentTickRate = currentTickRate - .25f;
         currentTickRate = Mathf.Clamp(currentTickRate, minSpeed, maxSpeed);
         OnTickRateChanged?.Invoke(currentTickRate);
     }
