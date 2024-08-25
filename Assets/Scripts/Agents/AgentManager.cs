@@ -49,13 +49,10 @@ public class AgentManager : MonoBehaviour
         {
             int index = UnityEngine.Random.Range(0, agentService.Agents.Count);
             IAgent agentToRemove = agentService.Agents[index];
-            Destroy(agentToRemove.CurrentTargetTransform.gameObject);
-            Destroy(agentToRemove.AgentGameObject);
-         
+            Destroy(agentToRemove.AgentGameObject);      
             agentService.Agents.RemoveAt(index);
         }
     }
-
     public void ClearAllAgents()
     {
         foreach (Agent agent in agentService.Agents)
@@ -64,9 +61,7 @@ public class AgentManager : MonoBehaviour
             {
                 DOTween.Kill(agent, false);
             }
-            Destroy(agent.CurrentTargetTransform.gameObject);
-            Destroy(agent.AgentGameObject);
-          
+            Destroy(agent.AgentGameObject);        
         }
         agentService.Agents.Clear();
     }

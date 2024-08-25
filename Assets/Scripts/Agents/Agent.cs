@@ -23,11 +23,6 @@ public class Agent : MonoBehaviour, IAgent
     private float rotationDuration = 0.2f;
 
     [SerializeField]
-    private Transform currentTargetTransform;
-
-    public Transform CurrentTargetTransform { get=>currentTargetTransform; }
-
-    [SerializeField]
     private AIDestinationSetter destinationSetter;
 
     [SerializeField]
@@ -39,8 +34,6 @@ public class Agent : MonoBehaviour, IAgent
     {
         GUID = guid; 
         destinationSetter.agentsCurrentTarget = targetPosition;
-        //  currentTargetTransform.parent = this.transform.parent;
-        //  currentTargetTransform.position = Vector3.zero;
     }
     public void SetNewRandomDestination()
     {
@@ -57,12 +50,8 @@ public class Agent : MonoBehaviour, IAgent
                 validPositionFound = true;
             }
         }
-
         validPositionFound = false;
-        //   currentTargetTransform.transform.position = targetPosition;
-
         destinationSetter.agentsCurrentTarget = targetPosition;
-
     }
           
     private void SetMovingToDestination()
@@ -89,19 +78,6 @@ public class Agent : MonoBehaviour, IAgent
             SetNewRandomDestination();           
         });
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-
-        Debug.LogError(other.name);
-        if(other.gameObject.layer.Equals("Destination"))
-        {
-            Debug.LogError(other.name + " Udane Destination");
-            OnTargetReached?.Invoke(this.GUID);
-            SetNewRandomDestination();
-        }     
-    }
-
     private void OnDestroy()
     {
         this.DOKill(false);

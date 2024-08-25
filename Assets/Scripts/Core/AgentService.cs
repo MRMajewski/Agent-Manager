@@ -23,7 +23,6 @@ public class AgentService : MonoBehaviour, IAgentService
         OnAgentRemoved.Invoke();
         OnAgentNumberChanged.Invoke();
     }
-
     public void ClearAllAgents()
     {
         OnAllAgentsCleared?.Invoke();
@@ -31,7 +30,6 @@ public class AgentService : MonoBehaviour, IAgentService
     }
     public void HandleAgentReachedDestination(string agentGuid)
     {
-        Debug.Log($"Agent {agentGuid} dotar³ do celu.");
         OnAgentReachedDestination?.Invoke(agentGuid);
     }
 }

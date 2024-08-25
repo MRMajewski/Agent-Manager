@@ -7,6 +7,5 @@ public interface IAgent
     public string GUID { get; }
     public void SetNewRandomDestination();
     public GameObject AgentGameObject { get; set; }
-    public Transform CurrentTargetTransform { get; }
     public event Action<string> OnTargetReached;
 }
