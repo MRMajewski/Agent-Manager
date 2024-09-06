@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92e47199d4b00ce408e9b084be20bc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentPrefab: {fileID: 6217757096548351743, guid: 7165c90b14b57d54d9b269d6a08b6c72,
+  agentPrefab: {fileID: 1938688007804688236, guid: 9b0cd451d4552644e8823ccf26182445,
     type: 3}
   spawnPoint: {fileID: 1597045159}
   agentService: {fileID: 1925165868}
@@ -2104,7 +2104,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97a335d83b555f459df4d60ba7f995e, type: 2}
+  - {fileID: 2100000, guid: 648ffaa5c9a6a9745a09dafdd6ae1fd1, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3443,7 +3443,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 16.3
+  m_fontSize: 16
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1

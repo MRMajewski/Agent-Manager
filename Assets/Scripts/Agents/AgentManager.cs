@@ -78,4 +78,9 @@ public class AgentManager : MonoBehaviour
         agentService.OnAllAgentsCleared -= ClearAllAgents;
         tickService.OnTickRateChanged -= ChangeGameSpeed;
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }
