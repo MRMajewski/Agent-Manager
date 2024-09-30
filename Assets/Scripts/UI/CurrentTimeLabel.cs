@@ -21,7 +21,7 @@ public class CurrentTimeLabel : MonoBehaviour
     }
     public void UpdateTickRateLabel(float tickRate)
     {
-        currentTickRateLabel.text = "Tick rate: " + tickRate.ToString("F2");
+        currentTickRateLabel.text = "Time speed: " + tickRate.ToString("F2");
     }
     private void OnDestroy()
     {

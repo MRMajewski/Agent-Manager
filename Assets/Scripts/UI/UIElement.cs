@@ -23,7 +23,7 @@ public class UIElement : MonoBehaviour
     private void DisplayArrivalMessage(string agentGuid)
     {
         Blink();
-        messageLabel.text = $"Agent {agentGuid} arrived at destination!";
+        messageLabel.text = $"Agent {agentGuid}<br>arrived at destination!";
     }
 
     void Blink()
