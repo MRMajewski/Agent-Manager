@@ -15,8 +15,12 @@ public class AgentService : MonoBehaviour, IAgentService
 
     public void RequestAgentSpawn()
     {
-        OnRequestAgentSpawn.Invoke();
-        OnAgentNumberChanged.Invoke();
+        if (Agents.Count < 100)
+        {
+            OnRequestAgentSpawn.Invoke();
+            OnAgentNumberChanged.Invoke();
+        }
+   
     }
     public void RemoveRandomAgent()
     {

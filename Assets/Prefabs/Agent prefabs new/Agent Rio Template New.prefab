@@ -462,13 +462,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6742751761250249999}
-  - component: {fileID: 4028347902840392180}
   - component: {fileID: 5882758203296502724}
   - component: {fileID: -277955899772682287}
   - component: {fileID: -4914164453892494435}
   - component: {fileID: -3625186805046230141}
+  - component: {fileID: 49448765255042011}
   m_Layer: 0
-  m_Name: Agent Rio Template
+  m_Name: Agent Rio Template New
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -492,27 +492,6 @@ Transform:
   - {fileID: 7622893786438490811}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &4028347902840392180
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1938688007804688236}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 24fc2c3e62c52bf4e9e63fd980b8e85d, type: 3}
-  m_Controller: {fileID: 9100000, guid: a8fcc6974db86eb49b10db3c9408df00, type: 2}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &5882758203296502724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -526,8 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agentGameObject: {fileID: 1938688007804688236}
-  moveDurationRange: {x: 6, y: 15}
-  AgentSpawnRange: {x: 25, y: 25}
+  AgentSpawnRange: {x: 23, y: 23}
   destinationSetter: {fileID: -3625186805046230141}
   checkRadius: 2
 --- !u!114 &-277955899772682287
@@ -574,11 +552,11 @@ MonoBehaviour:
   radius: 0.33
   height: 1.8
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 3
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 9
   centerOffsetCompatibility: NaN
   repathRateCompatibility: NaN
   canSearchCompability: 0
@@ -594,11 +572,11 @@ MonoBehaviour:
   maxAcceleration: -2.5
   rotationSpeed: 720
   slowdownDistance: 0.2
-  pickNextWaypointDist: 0.7
-  endReachedDistance: 2
+  pickNextWaypointDist: 1
+  endReachedDistance: 5
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
+  whenCloseToDestination: 1
   constrainInsideGraph: 0
   agent: {fileID: 9048636129444478949, guid: 7165c90b14b57d54d9b269d6a08b6c72, type: 3}
 --- !u!114 &-3625186805046230141
@@ -616,6 +594,27 @@ MonoBehaviour:
   version: 1
   target: {fileID: 0}
   agentsCurrentTarget: {x: 0, y: 0, z: 0}
+--- !u!95 &49448765255042011
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938688007804688236}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 9452613758984c54a9af8f33ccbf5264, type: 3}
+  m_Controller: {fileID: 9100000, guid: a8fcc6974db86eb49b10db3c9408df00, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2076150538589998062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1808,7 @@ GameObject:
   - component: {fileID: 5858009943688131103}
   - component: {fileID: 8779864771763934589}
   - component: {fileID: 3792532757331816455}
+  - component: {fileID: 6905738894817968862}
   m_Layer: 0
   m_Name: Rio
   m_TagString: Untagged
@@ -1967,6 +1967,27 @@ CapsuleCollider:
   m_Height: 1.86
   m_Direction: 2
   m_Center: {x: 0.0009905228, y: -0.0035605002, z: 0.84238726}
+--- !u!95 &6905738894817968862
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7270120685378010943}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: a49d66d462113934dacb18a150e093ca, type: 3}
+  m_Controller: {fileID: 9100000, guid: bee997f064ed5014f9441d2b5f4d43ce, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7525268619471535793
 GameObject:
   m_ObjectHideFlags: 0

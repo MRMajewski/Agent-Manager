@@ -12,14 +12,14 @@ public class Agent : MonoBehaviour, IAgent
     [SerializeField]
     private GameObject agentGameObject;
     public GameObject AgentGameObject { get; set; }
-   
-    [SerializeField]
-    private Vector2 moveDurationRange;
+
+    //[SerializeField]
+    //private Vector2 moveDurationRange;
     [SerializeField]
     private Vector2 AgentSpawnRange;
 
     private Vector3 targetPosition;
-    private float moveDuration = 5f;
+    private float moveDuration = 4f;
     private float rotationDuration = 0.2f;
 
     [SerializeField]
@@ -54,22 +54,22 @@ public class Agent : MonoBehaviour, IAgent
         destinationSetter.agentsCurrentTarget = targetPosition;
     }
           
-    private void SetMovingToDestination()
-    {
-        moveDuration = UnityEngine.Random.Range(moveDurationRange.x, moveDurationRange.y);
-        rotationDuration = moveDuration * 0.1f;
-        RotateTowards();
-        MoveToTarget();
-    }
+    //private void SetMovingToDestination()
+    //{
+    //    moveDuration = UnityEngine.Random.Range(moveDurationRange.x, moveDurationRange.y);
+    //    rotationDuration = moveDuration * 0.1f;
+    //    RotateTowards();
+    //    MoveToTarget();
+    //}
 
-    void RotateTowards()
-    {
-        Vector3 direction = (targetPosition - transform.position).normalized;
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //void RotateTowards()
+    //{
+    //    Vector3 direction = (targetPosition - transform.position).normalized;
+    //    Quaternion targetRotation = Quaternion.LookRotation(direction);
 
-        transform.DORotateQuaternion(targetRotation, rotationDuration)
-            .SetEase(Ease.InOutQuad);
-    }
+    //    transform.DORotateQuaternion(targetRotation, rotationDuration)
+    //        .SetEase(Ease.InOutQuad);
+    //}
     private void MoveToTarget()
     {
         transform.DOMove(targetPosition, moveDuration).OnComplete(() =>
